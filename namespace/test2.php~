@@ -1,0 +1,19 @@
+<?php
+
+namespace main;
+
+require_once ("debag.php");
+
+use useful as uDebug;
+
+
+class Outputter{
+
+   static  public function getName(){
+        return "Mike";
+    }
+}
+
+echo Outputter::getName() . "\n";
+
+echo uDebug\Outputter::getName() . "\n";

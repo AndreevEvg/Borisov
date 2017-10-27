@@ -6,7 +6,7 @@ interface ISuperUser{
 
 class User{
 
-	public $name;
+    public $name;
 	public $login;
 	public $password;
 
@@ -60,6 +60,8 @@ class SuperPuperAdmin extends SuperUser{
         parent::showInfo();
 	}
 }
+
+
 
 $user1 = new User("John Smith", "john@example.com", 123);
 $user2 = new User("Mike Dow", "mike@example.com", 456);
