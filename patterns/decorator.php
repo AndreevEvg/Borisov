@@ -1,67 +1,73 @@
 <?php
 
-interface Shape{
+interface Shape {
 
-	public function draw();
+    public function draw();
 }
 
-class Rectange implements Shape{
+class Rectange implements Shape {
 
-	public function draw(){
-		echo __METHOD__ . "\n";
-	}
+    public function draw() {
+        echo __METHOD__ . "\n";
+    }
+
 }
 
-class Square implements Shape{
-	
-	public function draw(){
-		echo __METHOD__ . "\n";
-	}
+class Square implements Shape {
+
+    public function draw() {
+        echo __METHOD__ . "\n";
+    }
+
 }
 
-class Circle implements Shape{
-	
-	public function draw(){
-		echo __METHOD__ . "\n";
-	}
+class Circle implements Shape {
+
+    public function draw() {
+        echo __METHOD__ . "\n";
+    }
+
 }
 
-abstract class ShapeDecorator implements Shape{
+abstract class ShapeDecorator implements Shape {
 
-	protected $decoratedShape;
+    protected $decoratedShape;
 
-	public function __construct(Shape $decoratedShape){
+    public function __construct(Shape $decoratedShape) {
 
-		$this->decoratedShape = $decoratedShape;
-	}
+        $this->decoratedShape = $decoratedShape;
+    }
 
-	public function draw(){
+    public function draw() {
 
-		$this->decoratedShape->draw();
-	}
+        $this->decoratedShape->draw();
+    }
+
 }
 
-class RedShapeDecorator extends ShapeDecorator{
+class RedShapeDecorator extends ShapeDecorator {
 
-	public function __construct(Shape $decoratedShape){
+    public function __construct(Shape $decoratedShape) {
 
-		parent::__construct($decoratedShape);
-	}
+        parent::__construct($decoratedShape);
+    }
 
-	private function setRedBorder(){
+    private function setRedBorder() {
 
-		echo "BORDER COLOR RED\n";
-	}
+        echo "BORDER COLOR RED\n";
+    }
 
-	public function draw(){
+    public function draw() {
 
-		$this->decoratedShape->draw();
-		$this->setRedBorder();
-	}
+        //$this->decoratedShape->draw();
+        parent::draw();
+        $this->setRedBorder();
+    }
+
 }
 
 $c = new Circle;
 $rc = new RedShapeDecorator(new Circle);
 
-$c->draw();
+//$c->draw();
 $rc->draw();

@@ -1,6 +1,7 @@
 <?php
 
-class Person{
+class Person
+{
 
     public $name;
     public $age;
@@ -12,63 +13,64 @@ class Person{
 $prod_class = new ReflectionClass('Person');
 $methods = $prod_class->getMethods();
 
-foreach($methods as $method){
+foreach ($methods as $method) {
     
     echo methodData($method);
     echo "\n----\n";
 }
 
-function methodData(ReflectionMethod $method){
+function methodData(ReflectionMethod $method)
+{
 
     $details = "";
     $name = $method->getName();
 
-    if($method->isUserDefined()){
+    if ($method->isUserDefined()) {
 
         $details .= "$name - метод определен пользователем\n";
     }
 
-    if($method->isInternal()){
+    if ($method->isInternal()) {
 
         $details .= "$name - внутренний метод\n";
     }
 
-    if($method->isAbstract()){
+    if ($method->isAbstract()) {
 
         $details .= "$name - абстрактный метод\n";
     }
 
-    if($method->isPublic()){
+    if ($method->isPublic()) {
 
         $details .= "$name - общедоступный метод\n";
     }
 
-    if($method->isProtected()){
+    if ($method->isProtected()) {
 
         $details .= "$name - защищенный метод\n";
     }
 
-    if($method->isPrivate()){
+    if ($method->isPrivate()) {
 
         $details .= "$name - закрытый метод\n";
     }
 
-    if($method->isStatic()){
+    if ($method->isStatic()) {
 
         $details .= "$name - статический метод\n";
     }
 
-    if($method->isFinal()){
+    if ($method->isFinal()) {
 
         $details .= "$name - завершенный метод\n";
     }
 
-    if($method->isConstructor()){
+    if ($method->isConstructor()) {
 
         $details .= "$name - метод конструктора\n";
     }
 
-    if($method->returnsReference()){
+    if ($method->returnsReference()) {
 
         $details .= "$name - метод возвращает ссылку, а не значение\n";
     }
