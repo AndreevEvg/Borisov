@@ -66,12 +66,32 @@ class Login implements Observable
     }
 }
 
-
-class SecurityMonitor implements Observer
-{    
+abstract class LoginObserver implements Observer
+{
+    private $login;
+    
+    public function __construct(Login $login)
+    {
+        $this->login = $login;
+        $login->attach($this);
+    }
+    
     public function update(Observable $observable)
     {
-        $status = $observable->getStatus();
+        if ($observable === $this->login) {
+            $this->doUpdate($observable);
+        }
+    }
+    
+    abstract function doUpdate(Login $login);
+}
+
+
+class SecurityMonitor extends LoginObserver
+{    
+    public function doUpdate(Login $login)
+    {
+        $status = $login->getStatus();
         
         if ($status[0] == Login::LOGIN_WRONG_PASS) {
             echo __CLASS__ . ": Отправка почты системному администратору<br>";
@@ -79,5 +99,27 @@ class SecurityMonitor implements Observer
     }
 }
 
+class GeneralLogger extends LoginObserver
+{
+    public function doUpdate(Login $login)
+    {
+        $status = $login->getStatus();
+        echo __CLASS__ . ": Регистрация в системном журнале<br>";
+    }
+}
+
+class PartnershipTool extends LoginObserver
+{
+    public function doUpdate(Login $login)
+    {
+        $status = $login->getStatus();
+        echo __CLASS__ . ": Отправка cookie-файла, если адрес соответсвует списку<br>";
+    }
+}
+
+
+
 $login = new Login();
-$login->attach(new SecurityMonitor());
+new SecurityMonitor($login);
+new GeneralLogger($login);
+new PartnershipTool($login);

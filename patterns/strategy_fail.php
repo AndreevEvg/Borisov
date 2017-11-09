@@ -2,48 +2,48 @@
 
 abstract class Lesson
 {
-	protected $duration;
-	const FIXED = 1;
-	const TIMED = 2;
-	private $costtype;
+    protected $duration;
+    const FIXED = 1;
+    const TIMED = 2;
+    private $costtype;
 
-	public function __construct($duration, $costtype = 1)
-	{
-		$this->duration = $duration;
-		$this->costtype = $costtype;
-	}
+    public function __construct($duration, $costtype = 1)
+    {
+        $this->duration = $duration;
+        $this->costtype = $costtype;
+    }
 
-	public function cost()
-	{
-		switch ($this->costtype) {
+    public function cost()
+    {
+        switch ($this->costtype) {
 
-			CASE self::TIMED:
-				return (5 * $this->duration);
-				break;
-			CASE self::FIXED:
-				return 30;
-				break;
-			default:
-				$this->costtype = self::FIXED;
-				return 30;
-		}
-	}
+            CASE self::TIMED:
+                return (5 * $this->duration);
+                break;
+            CASE self::FIXED:
+                return 30;
+                break;
+            default:
+                $this->costtype = self::FIXED;
+                return 30;
+        }
+    }
 
-	public function chargeType()
-	{
-		switch ($this->costtype) {
+    public function chargeType()
+    {
+        switch ($this->costtype) {
 
-			CASE self::TIMED:
-				return "Почасовая оплата";
-				break;
-			CASE self::FIXED:
-				return "Фиксированная оплата";
-				break;
-			default:
-				$this->costtype = self::FIXED;
-				return "Фиксированная ставка";
-		}
-	}
+            CASE self::TIMED:
+                return "Почасовая оплата";
+                break;
+            CASE self::FIXED:
+                return "Фиксированная оплата";
+                break;
+            default:
+                $this->costtype = self::FIXED;
+                return "Фиксированная ставка";
+        }
+    }
 }
 
 class Lecture extends Lesson
