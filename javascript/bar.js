@@ -1,2 +1,3 @@
+var n = 123456.789;
 
-console.log("0" == false);
+console.log(n.toPrecision(7));

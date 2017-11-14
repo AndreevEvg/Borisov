@@ -1,5 +1,11 @@
 <?php
 
+abstract class CostStrategy
+{
+    abstract function cost(Lesson $lesson);
+    abstract function chargeType();
+}
+
 abstract class Lesson
 {
     private $duration;
@@ -37,11 +43,6 @@ class Seminar extends Lesson
 
 }
 
-abstract class CostStrategy
-{
-    abstract function cost(Lesson $lesson);
-    abstract function chargeType();
-}
 
 class TimedCostStrategy extends CostStrategy
 {
