@@ -12,4 +12,5 @@ for ($i = 0; $i < 5; $i++) {
 }
 
 echo "EDIT - 2";
+echo "EDIT - 4";
 
