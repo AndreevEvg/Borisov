@@ -13,8 +13,3 @@ for ($i = 0; $i < 5; $i++) {
 
 
 
-echo "Commit - 2<br>";
-echo "Commit - 4<br>";
-echo "Commit -1<br>";
-echo "Commit -3<br>";
-
