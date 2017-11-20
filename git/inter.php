@@ -10,9 +10,3 @@ for ($i = 0; $i < 10; $i++) {
 for ($i = 0; $i < 5; $i++) {
     echo $i . "<br>";
 }
-
-echo "Line - 2<br>";
-echo "Line - 4<br>";
-
-echo "Line - 1<br>";
-echo "Line - 3<br>";
