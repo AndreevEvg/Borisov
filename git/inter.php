@@ -13,3 +13,5 @@ for ($i = 0; $i < 5; $i++) {
 
 echo "Line - 2<br>";
 echo "Line - 4<br>";
+
+echo "Line - 1<br>";
