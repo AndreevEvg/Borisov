@@ -1,51 +1,56 @@
 <?php
 
-abstract class FormatWrite
+abstract class Lesson
 {
-    abstract function write();
-}
-
-class Html extends FormatWrite
-{
-    public function write()
-    {
-        echo "Write HTML";
-    }
-}
-
-class Xml extends FormatWrite
-{
-    public function write()
-    {
-        echo "Write XML";
-    }
-}
-
-class Writer
-{
-    private static $instance = null;
+    protected $duration;
+    const FIXED = 1;
+    const TIMED = 2;
+    private $costtype;
     
-    private function __construct(){}
-    
-    public function getInstance()
+    public function __construct($duration, $costtype = 1)
     {
-        if (self::$instance == null) {
-            self::$instance = new self();
+        $this->duration = $duration;
+        $this->costtype = $costtype;
+    }
+    
+    public function cost()
+    {
+        switch ($this->costtype) {
+            case self::TIMED:
+                return (5 * $this->duration);
+                break;
+            case self::FIXED:
+                return 30;
+                break;
+            default:
+                $this->costtype = self::FIXED;
+                return 30;
         }
-        return self::$instance;
     }
     
-    public function getWrite(FormatWrite $write)
+    public function chargeType()
     {
-        return new $write;
+        switch ($this->costtype) {
+            case self::TIMED:
+                return "Почасовая оплата";
+                break;
+            case self::FIXED:
+                return "Фиксированная ставка";
+                break;
+            default:
+                $this->costtype = self::FIXED;
+                return "Фиксированная ставка";
+        }
     }
 }
 
-$xml = Writer::getInstance()->getWrite(new Xml());
-$xml->write();
+class Seminar extends Lesson{}
+class Lecture extends Lesson{}
+
+$lecture = new Lecture(5, Lesson::FIXED);
+echo "{$lecture->cost()} ({$lecture->chargeType()})";
 
 echo "<br>";
 
-$html = Writer::getInstance()->getWrite(new Html());
-$html->write();
-
+$seminar = new Seminar(3, Lecture::TIMED);
+echo "{$seminar->cost()} ({$seminar->chargeType()})";

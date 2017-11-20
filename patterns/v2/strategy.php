@@ -10,68 +10,68 @@ abstract class Lesson
 {
     private $duration;
     private $costStrategy;
-
+    
     public function __construct($duration, CostStrategy $strategy)
     {
         $this->duration = $duration;
         $this->costStrategy = $strategy;
     }
-
+    
     public function cost()
     {
         return $this->costStrategy->cost($this);
     }
-
+    
     public function chargeType()
     {
         return $this->costStrategy->chargeType();
     }
-
+    
     public function getDuration()
     {
-        return $this->duration;
+        return $this->duration; 
     }
 }
-
-class Lecture extends Lesson{}
-
-class Seminar extends Lesson{}
-
 
 class TimedCostStrategy extends CostStrategy
 {
     public function cost(Lesson $lesson)
     {
-        return  ($lesson->getDuration() * 5);
+        return ($lesson->getDuration() * 5);
     }
-
+    
     public function chargeType()
     {
         return "Почасовая оплата";
     }
 }
 
-class FixedCostStrategy extends CostStrategy
+class FixedCostStratyge extends CostStrategy
 {
     public function cost(Lesson $lesson)
     {
         return 30;
     }
-
+    
     public function chargeType()
     {
         return "Фиксированная ставка";
     }
 }
 
+class Lecture extends Lesson{}
+class Seminar extends Lesson{}
+
 $lessons[] = new Seminar(4, new TimedCostStrategy());
-$lessons[] = new Lecture(4, new FixedCostStrategy());
+$lessons[] = new Lecture(4, new FixedCostStratyge());
+
 /*
 foreach ($lessons as $lesson) {
-    echo "Плата за занятие {$lesson->cost()}. ";
+    echo "Плата за занятие {$lesson->cost()} ";
     echo "Тип оплаты: {$lesson->chargeType()}<br>";
 }
 */
+
 class RegistrationMgr
 {
     public function register(Lesson $lesson)
@@ -83,19 +83,16 @@ class RegistrationMgr
 
 abstract class Notifier
 {
-    public static function getNotifier()
+    static function getNotifier()
     {
         if (rand(1, 2) === 1) {
-
             return new MailNotifier();
         } else {
-
             return new TextNotifier();
         }
     }
-
+    
     abstract function inform($message);
-
 }
 
 class MailNotifier extends Notifier
@@ -115,7 +112,7 @@ class TextNotifier extends Notifier
 }
 
 $lesson1 = new Seminar(4, new TimedCostStrategy());
-$lesson2 = new Lecture(4, new FixedCostStrategy());
+$lesson2 = new Lecture(4, new FixedCostStratyge());
 
 $mgr = new RegistrationMgr();
 $mgr->register($lesson1);

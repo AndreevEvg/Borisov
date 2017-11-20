@@ -1,10 +1,16 @@
 <?php
 
-$arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+$params = $_REQUEST;
 
-$count = count($arr);
-if($count = 0){
-	echo "Array is empty!";
-}else{
-	echo "Array contains $count elements!";
+echo ucfirst(strtolower($params["action"])) . "Action";
+
+/*
+if (isset($_GET["action"])) { 
+    $action = $_GET['action'];  
+    if ($action == 'select') {
+        echo "Выборка данных из базы данных!";
+    } elseif ($action == 'insert') {
+        echo "Запись данных в базу данных!";
+    }
 }
+*/
